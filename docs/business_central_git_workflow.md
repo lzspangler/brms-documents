@@ -1,11 +1,11 @@
 # Red Hat JBoss BRMS 6.x Business Central Git Development Workflow
 
-<br />
+
 ## Introduction and Motivation
 
 This document presents a recommended git-based development workflow using a deployed Business Central instance as a shared rules authoring environment. 
 
-<br />
+
 The document assumes a dev team following a standard git workflow such as:
 <br />http://nvie.com/posts/a-successful-git-branching-model/
 <br />https://guides.github.com/introduction/flow/
