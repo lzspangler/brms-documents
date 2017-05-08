@@ -23,7 +23,7 @@ Because Business Central does not currently support branching and merging within
 Additional git support is planned for the 7.x release, and an updated workflow process will follow.
 
 <br />** Note **<br />
-This document is a summarized version of the git workflow notes found here:<br />
+This document is a summarized version of Donato Marrazzo's git workflow notes found here:<br />
 https://github.com/dmarrazzo/rh-bpm-notes/blob/master/git_workflow.md
 
 <br />
@@ -31,10 +31,10 @@ Please see the above for further detail.
 
 
 
-<br /><br />
+
 ## Architecture and Workflow Overview
 
-![workflow diagram](./imgs/bc_git_workflow.png)
+![workflow diagram](././imgs/bc_git_workflow.png)
 
 
 <br />
@@ -57,7 +57,6 @@ In a typical workflow a developer would:
 - After merge, ensure working branch is up to date with release branch and ready to start work on a new story/feature
 
 
-<br /><br />
 ## Enterprise git Setup
 
 <br />
@@ -73,7 +72,7 @@ Assuming that developers each have a username in the git repository and can fetc
 The reason for using long-lived working branches is due to the fact that Business Central currently requires restart to recognize new branches in its repository (although updates to working branches are registered).
 
 
-<br /><br />
+
 ## Configuration on Business Central
 
 <br />
@@ -98,7 +97,7 @@ The reason for using long-lived working branches is due to the fact that Busines
 There is no need to switch branch from 'master' in the Repository Editor.
 
 
-<br /><br />
+
 ## Configuration on Local Developer Environment 
 
 <br />
@@ -131,13 +130,11 @@ Ensure that `~/.ssh/config` has these access rights: `-rw-------`
 **Add Central Enterprise Repo to Local Checkout**
 - In order to fetch and push from enterprise git, calling the enterprise git 'upstream':
 
-    ```
     $ git remote add upstream <team_repo_url>
-    ```
 
 
 
-<br /><br />
+
 ## Working in Business Central
 <br />
 Once the above steps have been completed, each developer can login to Business Central using their own credentials and switch to their branch to begin working.
