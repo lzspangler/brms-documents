@@ -28,7 +28,7 @@ Please see the above for further detail.
 
 ## Architecture and Workflow Overview
 
-![workflow diagram](../../imgs/bc_git_workflow.png)
+![workflow diagram](../imgs/bc_git_workflow.png)
 
 The main architectural components are:
 - Centralized enterprise git repository environment where the project's master and release branches are maintained
@@ -71,7 +71,7 @@ The reason for using long-lived working branches is due to the fact that Busines
 - Set a password for each user
 - On restart of Business Central, developers should be able to login under their own user
 
-**Clone git Repository from Central git to Business Central**
+**Clone Repository from Enterprise Git to Business Central**
 - Login to Business Central as an admin user
 - Go to Authoring/Administration/Repositories/Clone repository and fill out:
 	- Repository Name
