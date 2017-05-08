@@ -36,6 +36,7 @@ The main architectural components are:
 - Long-lived developer working branches, used to develop features and merge back to release branches
 - Developer workstations
 
+
 In a typical workflow a developer would:
 - Clone the Business Central git repository to local development environment
 - Ensure their personal working branch is up to date with target release branch in enterprise git
