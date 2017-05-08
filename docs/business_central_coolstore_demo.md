@@ -1,7 +1,16 @@
 # Red Hat JBoss BRMS 6.x Business Central Cool Store Demo
 
-## 0. Introduction and Motivation
+## 0. Introduction
 
+The following steps demonstrate the process of creating a new rules project in BRMS 6.x Business Central with a retail store shopping cart example. This demonstration covers:
+- Organizational Units
+- Git Repositories
+- Rules Projects
+- DSL Rules
+- Guided Editor Rules
+- DRL Rules
+- Guided Decision Tables
+- Rule Flow Processes
 
 <br />** Note **<br />
 This document is an adapted version of Eric Schabell's BRMS 6 Cool Store Demo:
@@ -9,6 +18,7 @@ http://www.schabell.org/2014/03/redhat-jboss-brms-v6-coolstore-demo.html
 https://bpmworkshop.github.io/brms6_1/lab01.html#/
 https://github.com/jbossdemocentral/brms-coolstore-demo/tree/v2.0
 
+<br />
 
 ## 1. Creating a New Organizational Unit, Git Repository and Project
 
@@ -43,7 +53,7 @@ Create a new Organizational Unit with an enclosed git repository and new Kie pro
 		- Artifact ID: coolstore
 		- Version: 1.0.0
 
-![creating project](./imgs/brms_coolstore_demo_04.png)
+![creating project](../imgs/brms_coolstore_demo_04.png)
 
 - Navigate to:
 	- PROJECT EXPLORER -> coolstore/src/main/resources/META-INF/kmodule.xml
@@ -55,13 +65,14 @@ Create a new Organizational Unit with an enclosed git repository and new Kie pro
   	</kbase>
 ```
 	
-![creating kbase](./imgs/brms_coolstore_demo_05.png)
+![creating kbase](../imgs/brms_coolstore_demo_05.png)
 	
 <br />** Note **<br />
 If a KieBase is not explicitly defined in a rules project's kmodule.xml, a default KieBase and KieSession with reasonable defaults will be assumed.
 See the drools documentation for further detail:
 https://docs.jboss.org/drools/release/6.4.0.Final/drools-docs/html_single/#KIEBuildingSection
 
+<br />
 
 ## 2. Importing a Domain Model
 
@@ -74,7 +85,7 @@ Make a Java fact model available to the Kie project.
 	
 	- Upload the brms-coolstore-model-1.0-SNAPSHOT.jar to the Business Central artifact repository
 	
-![creating project](./imgs/brms_coolstore_demo_06.png)
+![creating project](../imgs/brms_coolstore_demo_06.png)
 	
 - Navigate to:
 	- AUTHORING -> PROJECT AUTHORING -> coolstore/pom.xml
@@ -95,6 +106,8 @@ Make a Java fact model available to the Kie project.
 For simplicity, in this demo we are uploading the domain model jar through Business Central, which installs to Business Central's m2 directory. 
 It is also possible to connect Business Central to an external maven repository from which to pull dependencies.
 The domain model could even be authored in Business Central itself, however, most applications will already have a Java domain defined elsewhere.
+
+<br />
 
 ## 3. Cloning to a Local Workspace and Creating Release and Working Branches
 
@@ -118,7 +131,6 @@ Create release and working git branches to facilitate development lifecycle.
     chmod 600 ~/.ssh/config
 ```
 
-<br />
 - Navigate to:
 	- AUTHORING -> ADMINISTRATION -> REPOSITORIES -> LIST
 	
@@ -149,7 +161,6 @@ Create release and working git branches to facilitate development lifecycle.
 
 ![creating project](../imgs/brms_coolstore_demo_07.png)
 
-				
 		
 <br />** Note **<br />
 As of writing, in current version of BRMS (6.4.0-GA), Business Central does not support branching and merging operations within the tool. Therefore these operations must be handled outside of Business Central and pushed back.
@@ -162,6 +173,7 @@ New commits to branches that Business Central already recognizes will appear wit
 There are two places in Business Central where branches appear: in Authoring/Project Authoring and Authoring/Administration/Repositories. 
 In order to work on a branch, make sure that you have switched to that branch in the Project Authoring view. The repository does not need to be switched from master in the Repositories view.
 
+<br />
 
 ## 4. Authoring Rules with DSL
 
@@ -197,7 +209,8 @@ Add a DSL definition and create a guided rule to use it.
 <br />** Note **<br />
 At this time DSL definitions must be placed in the same package as the rules which use them.
 	
-	
+<br />
+
 ## 5. Authoring Rules with The Guided Rule Editor
 
 Create a rule using only the guided rule editor.
@@ -224,7 +237,7 @@ Create a rule using only the guided rule editor.
 		
 ![guided rule](../imgs/brms_coolstore_demo_09.png)
 
-
+<br />
 
 ## 6. Authoring Rules with Free DRL
 
@@ -260,7 +273,7 @@ Create a free DRL rule.
 
 ![guided rule](../imgs/brms_coolstore_demo_10.png)
 
-
+<br />
 
 ## 7. Authoring Rules with The Guided Decision Table Editor
 
@@ -313,8 +326,8 @@ Create a free DRL rule.
 <br />
 ![decision table](../imgs/brms_coolstore_demo_11.png)
 
-		
-<br />
+<br />	
+
 ## 8. Creating a Business Process to Orchestrate Rules Execution
 
 	- NEW PACKAGE 
