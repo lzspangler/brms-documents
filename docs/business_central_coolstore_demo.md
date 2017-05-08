@@ -186,22 +186,22 @@ Add a DSL definition and create a guided rule to use it.
 	- NEW ITEM -> DSL DEFINITION
 		- Create a new DSL definition 'promotions'
 		
-```		
+```	
 		[when]If customer spends ${var}=$shoppingCart : ShoppingCart( cartItemTotal >= {var} )
 		[then]Apply Free Shipping=$shoppingCart.setShippingPromoSavings( $shoppingCart.shippingTotal * -1 ); $shoppingCart.setShippingTotal( 0 ); update( $shoppingCart );
 ```
-	- NEW GUIDED RULE
-		- Create a new guided rule 'free_shipping_promotion'
-		- Check the option to use DSL
-		- Add WHEN condition
-			- If customer spends $75 
-		- Add THEN condition
-			- Apply Free Shipping
-		- Add Attributes
-			- no-loop true
-			- ruleflow-group promo-rules
-	- Under the DATA OBJECTS tab add an import for the ShoppingCart object
-	- Save and validate
+- NEW GUIDED RULE
+	- Create a new guided rule 'free_shipping_promotion'
+	- Check the option to use DSL
+	- Add WHEN condition
+		- If customer spends $75 
+	- Add THEN condition
+		- Apply Free Shipping
+	- Add Attributes
+		- no-loop true
+		- ruleflow-group promo-rules
+- Under the DATA OBJECTS tab add an import for the ShoppingCart object
+- Save and validate
 			
 ![DSL rule](../imgs/brms_coolstore_demo_08.png)
 
@@ -215,25 +215,25 @@ At this time DSL definitions must be placed in the same package as the rules whi
 
 Create a rule using only the guided rule editor.
 
-	- NEW PACKAGE 
-		- Create a new package 'totals'
-	- NEW GUIDED RULE
-		- Create a new guided rule 'shopping_cart_totals'
-		- Leave the option to use DSL unchecked
-	- Under the DATA OBJECTS tab add an import for the ShoppingCart object
-	- Add a WHEN condition
-		- 'There is a ShoppingCart'
-		- Assign the cart to a variable '$shoppingCart'
-	- Add a THEN condition
-		- 'Modify $shoppingCart' 
-		- Set cartTotal to literal value: 
-			- 0.0
-		- Set cartItemPromoSavings to the formula:
-			- ($shoppingCart.cartItemPromoSavings == 0.0) ? 0.0 : $shoppingCart.cartItemPromoSavings * -1
-	- Add attributes
-		- no-loop true
-		- ruleflow-group total-rules
-	- Save and validate
+- NEW PACKAGE 
+	- Create a new package 'totals'
+- NEW GUIDED RULE
+	- Create a new guided rule 'shopping_cart_totals'
+	- Leave the option to use DSL unchecked
+- Under the DATA OBJECTS tab add an import for the ShoppingCart object
+- Add a WHEN condition
+	- 'There is a ShoppingCart'
+	- Assign the cart to a variable '$shoppingCart'
+- Add a THEN condition
+	- 'Modify $shoppingCart' 
+	- Set cartTotal to literal value: 
+		- 0.0
+	- Set cartItemPromoSavings to the formula:
+		- ($shoppingCart.cartItemPromoSavings == 0.0) ? 0.0 : $shoppingCart.cartItemPromoSavings * -1
+- Add attributes
+	- no-loop true
+	- ruleflow-group total-rules
+- Save and validate
 		
 ![guided rule](../imgs/brms_coolstore_demo_09.png)
 
@@ -243,11 +243,11 @@ Create a rule using only the guided rule editor.
 
 Create a free DRL rule.
 
-	- NEW PACKAGE 
-		- Create a new package 'pricing'
-	- NEW DRL File
-		- Create new DRL file total_shopping_cart_items
-	- Paste the following rule definition:
+- NEW PACKAGE 
+	- Create a new package 'pricing'
+- NEW DRL File
+	- Create new DRL file total_shopping_cart_items
+- Paste the following rule definition:
 	
 ```	
 	package com.redhat.demos.coolstore.pricing;
@@ -269,7 +269,7 @@ Create a free DRL rule.
 	end
 ```	
 
-	- Save and validate
+- Save and validate
 
 ![guided rule](../imgs/brms_coolstore_demo_10.png)
 
@@ -312,42 +312,42 @@ Create a free DRL rule.
 	- Set the ruleflow-group to "shipping-rules"
 
 - Add the following tabular data:
-<br />
-		Description			Total >=	Total <		Shipping Total
-		Shipping Tier 1		0			25			2.99
-		Shipping Tier 2		25			50			4.99
-		Shipping Tier 3		50			75			6.99
-		Shipping Tier 4		75			100			8.99
-		Shipping Tier 5		100			1000000		10.99
+
+```
+		Description		Total >=	Total <		Shipping Total
+		Shipping Tier 1		0		25		2.99
+		Shipping Tier 2		25		50		4.99
+		Shipping Tier 3		50		75		6.99
+		Shipping Tier 4		75		100		8.99
+		Shipping Tier 5		100		1000000		10.99
 		
+```	
 		
-	- Save and validate
+- Save and validate
 		
-<br />
 ![decision table](../imgs/brms_coolstore_demo_11.png)
 
 <br />	
 
 ## 8. Creating a Business Process to Orchestrate Rules Execution
 
-	- NEW PACKAGE 
-		- Create a new package 'processes'
-	- NEW BUSINESS PROCESS
-		- Create a new business process called 'PriceProcess'
-	- From the start node, drag to create 5 new nodes and then an end node
-	- Set the nodes to TaskType Business Rule
-	- Label the nodes as follows
-		- Total Shopping Cart Items
-		- Calculate Shipping
-		- Apply Shipping Promotions
-		- Total Shopping Cart
-	- Assign the nodes to ruleflow groups as follows:
-		- Total Shopping Cart Items		-> 		pricing-rules
-		- Calculate Shipping			-> 		shipping-rules
-		- Apply Shipping Promotions		-> 		promo-rules
-		- Total Shopping Cart			-> 		total-rules
+- NEW PACKAGE 
+	- Create a new package 'processes'
+- NEW BUSINESS PROCESS
+	- Create a new business process called 'PriceProcess'
+- From the start node, drag to create 5 new nodes and then an end node
+- Set the nodes to TaskType Business Rule
+- Label the nodes as follows
+	- Total Shopping Cart Items
+	- Calculate Shipping
+	- Apply Shipping Promotions
+	- Total Shopping Cart
+- Assign the nodes to ruleflow groups as follows:
+	- Total Shopping Cart Items		-> 		pricing-rules
+	- Calculate Shipping			-> 		shipping-rules
+	- Apply Shipping Promotions		-> 		promo-rules
+	- Total Shopping Cart			-> 		total-rules
 	
-<br />
 ![guided rule](../imgs/brms_coolstore_demo_12.png)
 
 
