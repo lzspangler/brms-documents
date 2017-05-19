@@ -7,6 +7,7 @@ This document outlines a recommended and alternative approach for using Business
 Central as a rules authoring environment which feeds into continuous integration pipelines.
 
 **Note**
+
 Business Central is backed by a local git repository, however, under the 6.x series
 branching and merging within the tool is not supported. Therefore in the following
 outlines, all git branch administration (branch, merge, etc.) is handled outside of the
@@ -17,6 +18,7 @@ make local git checkout and administration optional.
 
 For further detail on recommended approach to Business Central git branch administration,
 please see the documentation on git workflow:
+
 https://github.com/lzspangler/brms-documents/blob/master/docs/business_central_git_workflow.md 
 
 
@@ -69,14 +71,14 @@ Under this model, a rules project is created and maintained in Business Central.
 administrator would checkout the project, create master, release and working branches
 and then push back to Business Central.
 
-Development is still done on working branches, and work is not done directly on release 
+Development is still done on working branches, and commits are not made directly to release 
 or master branches in Business Central.
 
 Developers run non-Business Central tests on their own local checkouts, and squash 
 commits when done working on a feature. 
 
 The working branches are pushed back to Business Central, and an administrator or lead
-pulls. Code review and merge are done by admin/lead on their own checkouts. Updated
+fetches. Code review and merge are done by admin/lead on their own checkouts. Updated
 release branches are pushed back to Business Central. 
 
 In Business Central, and administrator can open the project, switch to the release branch,
