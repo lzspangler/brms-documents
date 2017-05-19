@@ -23,6 +23,7 @@ https://github.com/lzspangler/brms-documents/blob/master/docs/business_central_c
 
 
 **Note**
+
 Notes on test tooling in current Business Central:
 - Business Central is only capable of unit testing
 - Test scenarios can be configured to execute:
@@ -37,6 +38,7 @@ server may require restart
 
 
 **Note**
+
 It should be emphasized that unit testing of individual rules or ruleflow groups is not 
 enough on its own.
 
@@ -50,10 +52,12 @@ be in addition to automated functional application testing.
 
 
 **Note**
+
 This document is an adapted version of material in Eric Schabell's BRMS 6 Cool Store Demo: 
 http://www.schabell.org/2014/03/redhat-jboss-brms-v6-coolstore-demo.html 
 https://bpmworkshop.github.io/brms6_1/lab01.html#/ 
 https://github.com/jbossdemocentral/brms-coolstore-demo/tree/v2.0
+
 
 
 
@@ -88,8 +92,9 @@ com.redhat.demos.coolstore.pricing
 - Notice the 'Audit log' that appears after the test ran, click to expand and view audit 
 log information
 
-![test individual rule](../imgs/bc_testing01.png)
-![audit log](../imgs/bc_testing02.png)
+![test individual rule](../imgs/bc_testing_01.png)
+![audit log](../imgs/bc_testing_02.png)
+
 
 
 
@@ -109,9 +114,10 @@ log information
 - Change the value of the cartItemTotal to see that a different rule ran (any rule in 
 the ruleflow group is able to run)
 
-![test ruleflow group](../imgs/bc_testing03.png)
+![test ruleflow group](../imgs/bc_testing_03.png)
 
 **Note**
+
 Chaining tests together in one business central test scenario can be done by clicking the 
 'More...' button toward the bottom of the test. 
 
@@ -123,6 +129,7 @@ difficult to read.
 
 
 
+
 ## 3. Evaluating Test Failures
 
 In most cases, when a rule does not execute as expected it is because:
@@ -131,31 +138,31 @@ In most cases, when a rule does not execute as expected it is because:
 - Rules are interacting in an unintended way
 
 
-Rules Not Written as Expected
+
+## 4. Evaluating Test Failures - Rules Not Written as Expected
 
 - Open the rule 'total_shopping_cart_items' in src/main/resources/com.redhat.demos.coolstore.pricing
 - On line 11 change the field name 'shoppingCart' to 'shoppingCarts' and save
 
-![unexpected rule](../imgs/bc_testing04.png)
+![unexpected rule](../imgs/bc_testing_04.png)
 
 - Run the test 'shopping_cart_total_test.scenario' in src/test/resources/com.redhat.demos.coolstore.pricing
 
-![unexpected rule](../imgs/bc_testing04.png)
-
 - Look at the failures and see that the three test expectations were not met
 
-![unexpected rule](../imgs/bc_testing05.png)
+![unexpected rule](../imgs/bc_testing_05.png)
 
 - Notice also that there were 0 rules fired, and confirm in the audit log
 - Go back to the 'total_shopping_cart_items' rule and click the 'Validate' button
 
-![unexpected rule](../imgs/bc_testing06.png)
+![unexpected rule](../imgs/bc_testing_06.png)
 
 - Review the compilation error and change 'shoppingCarts' back to 'shoppingCart'
 - Save and rerun the test, it should succeed now
 
 
 **Note**
+
 In the case of a rule compilation error, drools will evaluate the left hand side of the
 rule to 'false' and will not produce any error otherwise. 
 
@@ -165,34 +172,38 @@ message will be shown in Business Central. To build all of the rules in a projec
 can use the 'Build and Deploy' option in the project editor view.
 
 
-Facts in Unexpected State
+
+
+## 5. Evaluating Test Failures - Facts in Unexpected State
 
 - Open the 'shipping_test.scenario' in src/test/resources/com.redhat.demos.coolstore.shipping
 - In the 'Given' statement which inserts the ShoppingCart, change the cartItemTotal to -24.99
 - Run the test and examine the failure messages
 
-![unexpected state](../imgs/bc_testing07.png)
+![unexpected state](../imgs/bc_testing_07.png)
 
 - View the audit log, this audit log does not show the object's state when inserted but
 in this case you can see the state (cartItemTotal=-24.99) in other rule activations
 
-![unexpected state](../imgs/bc_testing08.png)
+![unexpected state](../imgs/bc_testing_08.png)
 
 - Compare the cartItemTotal of -24.99 with the handled range of rules defined in the
 'shipping_rules' decision table in src/main/resources/com.redhat.demos.coolstore.shipping
 - Change the cartItemTotal back to 24.99 in the test, save and rerun
 
 
-Rules Interacting in Unintended Ways:
+
+
+## 6. Evaluating Test Failures - Rules Interacting in Unintended Ways
 - Open the 'shipping_rules' decision table in src/main/resources/com.redhat.demos.coolstore.shipping
 - Change the 'Total >=' column in Shipping Tier 2 to 24
 
-![unexpected state](../imgs/bc_testing09.png)
+![rule conflict](../imgs/bc_testing_09.png)
 
 - Run the test 'shipping_test.scenario' in src/test/resources/com.redhat.demos.coolstore.shipping
 - Review the failure messages and notice that two rules fired: 'Row 1 shipping_rules[1]' and 'Row 2 shipping_rules[1]'
 
-![unexpected state](../imgs/bc_testing09.png)
+![rule conflict](../imgs/bc_testing_10.png)
 
 - Review the rules in the 'shipping_rules' decision table and notice that these two rules 
 have overlapping conditions (total is between 0-24.99, and total is between 24.00-49.99
@@ -201,6 +212,7 @@ have overlapping conditions (total is between 0-24.99, and total is between 24.0
 
 
 **Note**
+
 The error messaging and debugging capabilities available in Business Central are limited
 to basic messaging when expect statements are not met, a list of rules fired, and a 
 simple audit log.
