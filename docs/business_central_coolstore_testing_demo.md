@@ -60,6 +60,7 @@ https://github.com/jbossdemocentral/brms-coolstore-demo/tree/v2.0
 
 
 
+
 ## 1. Testing an Individual Rule
 
 - Navigate to AUTHORING -> PROJECT AUTHORING -> NEW ITEM -> TEST SCENARIO
@@ -95,6 +96,8 @@ log information
 ![audit log](../imgs/bc_testing_02.png)
 
 
+
+
 ## 2. Testing a RuleFlow Group
 
 - Navigate to AUTHORING -> PROJECT AUTHORING -> NEW ITEM -> TEST SCENARIO
@@ -126,6 +129,7 @@ difficult to read.
 
 
 
+
 ## 3. Evaluating Test Failures
 
 In most cases, when a rule does not execute as expected it is because:
@@ -134,7 +138,8 @@ In most cases, when a rule does not execute as expected it is because:
 - Rules are interacting in an unintended way
 
 
-**Rules Not Written as Expected:**
+
+## 4. Evaluating Test Failures - Rules Not Written as Expected
 
 - Open the rule 'total_shopping_cart_items' in src/main/resources/com.redhat.demos.coolstore.pricing
 - On line 11 change the field name 'shoppingCart' to 'shoppingCarts' and save
@@ -142,8 +147,6 @@ In most cases, when a rule does not execute as expected it is because:
 ![unexpected rule](../imgs/bc_testing_04.png)
 
 - Run the test 'shopping_cart_total_test.scenario' in src/test/resources/com.redhat.demos.coolstore.pricing
-
-![unexpected rule](../imgs/bc_testing_04.png)
 
 - Look at the failures and see that the three test expectations were not met
 
@@ -169,7 +172,9 @@ message will be shown in Business Central. To build all of the rules in a projec
 can use the 'Build and Deploy' option in the project editor view.
 
 
-**Facts in Unexpected State:**
+
+
+## 5. Evaluating Test Failures - Facts in Unexpected State
 
 - Open the 'shipping_test.scenario' in src/test/resources/com.redhat.demos.coolstore.shipping
 - In the 'Given' statement which inserts the ShoppingCart, change the cartItemTotal to -24.99
@@ -187,7 +192,9 @@ in this case you can see the state (cartItemTotal=-24.99) in other rule activati
 - Change the cartItemTotal back to 24.99 in the test, save and rerun
 
 
-**Rules Interacting in Unintended Ways:**
+
+
+## 6. Evaluating Test Failures - Rules Interacting in Unintended Ways
 - Open the 'shipping_rules' decision table in src/main/resources/com.redhat.demos.coolstore.shipping
 - Change the 'Total >=' column in Shipping Tier 2 to 24
 
