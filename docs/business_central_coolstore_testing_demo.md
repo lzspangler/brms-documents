@@ -23,6 +23,7 @@ https://github.com/lzspangler/brms-documents/blob/master/docs/business_central_c
 
 
 **Note**
+
 Notes on test tooling in current Business Central:
 - Business Central is only capable of unit testing
 - Test scenarios can be configured to execute:
@@ -37,6 +38,7 @@ server may require restart
 
 
 **Note**
+
 It should be emphasized that unit testing of individual rules or ruleflow groups is not 
 enough on its own.
 
@@ -50,6 +52,7 @@ be in addition to automated functional application testing.
 
 
 **Note**
+
 This document is an adapted version of material in Eric Schabell's BRMS 6 Cool Store Demo: 
 http://www.schabell.org/2014/03/redhat-jboss-brms-v6-coolstore-demo.html 
 https://bpmworkshop.github.io/brms6_1/lab01.html#/ 
@@ -112,6 +115,7 @@ the ruleflow group is able to run)
 ![test ruleflow group](../imgs/bc_testing03.png)
 
 **Note**
+
 Chaining tests together in one business central test scenario can be done by clicking the 
 'More...' button toward the bottom of the test. 
 
@@ -156,6 +160,7 @@ Rules Not Written as Expected
 
 
 **Note**
+
 In the case of a rule compilation error, drools will evaluate the left hand side of the
 rule to 'false' and will not produce any error otherwise. 
 
@@ -187,12 +192,12 @@ Rules Interacting in Unintended Ways:
 - Open the 'shipping_rules' decision table in src/main/resources/com.redhat.demos.coolstore.shipping
 - Change the 'Total >=' column in Shipping Tier 2 to 24
 
-![unexpected state](../imgs/bc_testing09.png)
+![rule conflict](../imgs/bc_testing09.png)
 
 - Run the test 'shipping_test.scenario' in src/test/resources/com.redhat.demos.coolstore.shipping
 - Review the failure messages and notice that two rules fired: 'Row 1 shipping_rules[1]' and 'Row 2 shipping_rules[1]'
 
-![unexpected state](../imgs/bc_testing09.png)
+![rule conflict](../imgs/bc_testing09.png)
 
 - Review the rules in the 'shipping_rules' decision table and notice that these two rules 
 have overlapping conditions (total is between 0-24.99, and total is between 24.00-49.99
@@ -201,6 +206,7 @@ have overlapping conditions (total is between 0-24.99, and total is between 24.0
 
 
 **Note**
+
 The error messaging and debugging capabilities available in Business Central are limited
 to basic messaging when expect statements are not met, a list of rules fired, and a 
 simple audit log.
