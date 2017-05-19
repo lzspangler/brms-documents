@@ -91,9 +91,8 @@ com.redhat.demos.coolstore.pricing
 - Notice the 'Audit log' that appears after the test ran, click to expand and view audit 
 log information
 
-![test individual rule](../imgs/bc_testing01.png)
-![audit log](../imgs/bc_testing02.png)
-
+![test individual rule](../imgs/bc_testing_01.png)
+![audit log](../imgs/bc_testing_02.png)
 
 
 ## 2. Testing a RuleFlow Group
@@ -112,7 +111,7 @@ log information
 - Change the value of the cartItemTotal to see that a different rule ran (any rule in 
 the ruleflow group is able to run)
 
-![test ruleflow group](../imgs/bc_testing03.png)
+![test ruleflow group](../imgs/bc_testing_03.png)
 
 **Note**
 
@@ -135,25 +134,25 @@ In most cases, when a rule does not execute as expected it is because:
 - Rules are interacting in an unintended way
 
 
-Rules Not Written as Expected
+**Rules Not Written as Expected:**
 
 - Open the rule 'total_shopping_cart_items' in src/main/resources/com.redhat.demos.coolstore.pricing
 - On line 11 change the field name 'shoppingCart' to 'shoppingCarts' and save
 
-![unexpected rule](../imgs/bc_testing04.png)
+![unexpected rule](../imgs/bc_testing_04.png)
 
 - Run the test 'shopping_cart_total_test.scenario' in src/test/resources/com.redhat.demos.coolstore.pricing
 
-![unexpected rule](../imgs/bc_testing04.png)
+![unexpected rule](../imgs/bc_testing_04.png)
 
 - Look at the failures and see that the three test expectations were not met
 
-![unexpected rule](../imgs/bc_testing05.png)
+![unexpected rule](../imgs/bc_testing_05.png)
 
 - Notice also that there were 0 rules fired, and confirm in the audit log
 - Go back to the 'total_shopping_cart_items' rule and click the 'Validate' button
 
-![unexpected rule](../imgs/bc_testing06.png)
+![unexpected rule](../imgs/bc_testing_06.png)
 
 - Review the compilation error and change 'shoppingCarts' back to 'shoppingCart'
 - Save and rerun the test, it should succeed now
@@ -170,34 +169,34 @@ message will be shown in Business Central. To build all of the rules in a projec
 can use the 'Build and Deploy' option in the project editor view.
 
 
-Facts in Unexpected State
+**Facts in Unexpected State:**
 
 - Open the 'shipping_test.scenario' in src/test/resources/com.redhat.demos.coolstore.shipping
 - In the 'Given' statement which inserts the ShoppingCart, change the cartItemTotal to -24.99
 - Run the test and examine the failure messages
 
-![unexpected state](../imgs/bc_testing07.png)
+![unexpected state](../imgs/bc_testing_07.png)
 
 - View the audit log, this audit log does not show the object's state when inserted but
 in this case you can see the state (cartItemTotal=-24.99) in other rule activations
 
-![unexpected state](../imgs/bc_testing08.png)
+![unexpected state](../imgs/bc_testing_08.png)
 
 - Compare the cartItemTotal of -24.99 with the handled range of rules defined in the
 'shipping_rules' decision table in src/main/resources/com.redhat.demos.coolstore.shipping
 - Change the cartItemTotal back to 24.99 in the test, save and rerun
 
 
-Rules Interacting in Unintended Ways:
+**Rules Interacting in Unintended Ways:**
 - Open the 'shipping_rules' decision table in src/main/resources/com.redhat.demos.coolstore.shipping
 - Change the 'Total >=' column in Shipping Tier 2 to 24
 
-![rule conflict](../imgs/bc_testing09.png)
+![rule conflict](../imgs/bc_testing_09.png)
 
 - Run the test 'shipping_test.scenario' in src/test/resources/com.redhat.demos.coolstore.shipping
 - Review the failure messages and notice that two rules fired: 'Row 1 shipping_rules[1]' and 'Row 2 shipping_rules[1]'
 
-![rule conflict](../imgs/bc_testing09.png)
+![rule conflict](../imgs/bc_testing_10.png)
 
 - Review the rules in the 'shipping_rules' decision table and notice that these two rules 
 have overlapping conditions (total is between 0-24.99, and total is between 24.00-49.99
